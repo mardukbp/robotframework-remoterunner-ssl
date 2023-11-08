@@ -570,10 +570,10 @@ class MyXMLRPCServer(CustomThreadingMixIn, SimpleXMLRPCServer):
 
             def parse_request(myself):
                 if SimpleXMLRPCRequestHandler.parse_request(myself):
-                    basic, foo, encoded = myself.headers.get("Authorization").partition(
+                    basic, separator, encoded = myself.headers.get("Authorization").partition(
                         " "
                     )
-                    username, foo, password = (
+                    username, separator, password = (
                         b64decode(encoded).decode("UTF-8").partition(":")
                     )
                     if username == robot_user and password == robot_pass:
