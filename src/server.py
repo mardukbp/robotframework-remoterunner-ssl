@@ -473,7 +473,7 @@ class CustomThreadingMixIn:
 class MyXMLRPCServer(CustomThreadingMixIn, SimpleXMLRPCServer):
     def __init__(
         self,
-        ip,
+        host,
         port,
         keyFile=DEFAULTKEYFILE,
         certFile=DEFAULTCERTFILE,
@@ -580,7 +580,7 @@ class MyXMLRPCServer(CustomThreadingMixIn, SimpleXMLRPCServer):
                         return False
 
         SimpleXMLRPCDispatcher.__init__(self, False, None)
-        BaseServer.__init__(self, (ip, port), VerifyingRequestHandler)
+        BaseServer.__init__(self, (host, port), VerifyingRequestHandler)
 
         # SSL socket stuff
         ctx = SSL.Context(SSL.SSLv23_METHOD)
