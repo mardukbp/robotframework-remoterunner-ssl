@@ -30,7 +30,7 @@ from robot.utils.robotpath import find_file
 import os
 import re
 import logging
-from utils import (
+from rfremoterunner.utils import (
     calculate_ts_parent_path,
     read_file_from_disk,
     resolve_output_path,
