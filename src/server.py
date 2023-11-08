@@ -286,7 +286,7 @@ class RobotFrameworkServer:
 
                     try:
                         subprocess.check_call(installer_exec)
-                    except ex as Exception:
+                    except Exception as ex:
                         logger.info(
                             msg="Exception occurred while installing pip packages"
                         )
