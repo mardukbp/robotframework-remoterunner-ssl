@@ -68,6 +68,7 @@ DEFAULTCERTFILE = "cacert.pem"  # Replace with your PEM formatted certificate fi
 DEFAULT_ADDRESS = "0.0.0.0"
 DEFAULT_PORT = 1471
 
+robot_upgrade_server_packages = 'NEVER'
 
 class RobotFrameworkServer:
     def test_connection(self):
@@ -655,10 +656,11 @@ if __name__ == "__main__":
         robot_pass,
         robot_keyfile,
         robot_certfile,
-        robot_upgrade_server_packages,
+        upgrade_server_packages,
     ) = get_command_line_params_server()
 
-    logger.info(msg=f"robotframework-remoterunner-ssl: server init ....")
+    global robot_upgrade_server_packages
+    robot_upgrade_server_packages = upgrade_server_packages
 
     # Check if the keyfile exists
     if not os.path.isfile(robot_keyfile):
