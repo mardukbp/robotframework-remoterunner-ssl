@@ -468,7 +468,7 @@ class CustomThreadingMixIn:
         """Start a new thread to process the request."""
         t = Thread(target=self.process_request_thread, args=(request, client_address))
         if self.daemon_threads:
-            t.setDaemon(1)
+            t.daemon = True
         t.start()
 
 
