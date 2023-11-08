@@ -44,7 +44,7 @@ import shutil
 # Set up the global logger variable
 logger = logging.getLogger(__name__)
 
-IMPORT_LINE_REGEX = re.compile("(Resource|Library)([\\s]+)([^[\\n\\r]*)([\\s]+)")
+IMPORT_LINE_REGEX = re.compile("(Resource|Library)[ ]{2,}(\S+)[ ]*(.*)")
 
 
 class RemoteFrameworkClient:
