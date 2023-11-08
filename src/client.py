@@ -123,10 +123,8 @@ class RemoteFrameworkClient:
         self._package_suite_hierarchy(suite)
 
         # Make the RPC but do not disclose user/pw to the log file
-        debug_connect_string = self._remote_connect_string.split("@")
-        if len(debug_connect_string) > 0:
-            debug_connect_string = debug_connect_string[len(debug_connect_string) - 1]
-        logger.info(msg=f"Connecting to: {debug_connect_string}")
+        _, host_port = self._remote_connect_string.split("@")
+        logger.info(msg=f"Connecting to: {host_port}")
 
         p = ServerProxy(self._remote_connect_string)
         try:
@@ -145,7 +143,7 @@ class RemoteFrameworkClient:
             logger.info(msg=f"Error message: {err.errmsg}")
             raise
         except ConnectionRefusedError as err:
-            logger.info(msg=f"{debug_connect_string}: Connection refused!")
+            logger.info(msg=f"{host_port}: Connection refused!")
             raise
         except:
             raise
@@ -382,10 +380,8 @@ if __name__ == "__main__":
     # client user/pw matched server user/pw
     if robot_test_connection:
         p = ServerProxy(remote_connect_string)
-        debug_connect_string = remote_connect_string.split("@")
-        if len(debug_connect_string) > 0:
-            debug_connect_string = debug_connect_string[len(debug_connect_string) - 1]
-        logger.info(msg=f"Connecting to: {debug_connect_string}")
+        _, host_port = remote_connect_string.split("@")
+        logger.info(msg=f"Connecting to: {host_port}")
         try:
             logger.info(msg=p.test_connection())
         except ProtocolError as err:
@@ -393,7 +389,7 @@ if __name__ == "__main__":
             logger.info(msg=f"Error code: {err.errcode}")
             logger.info(msg=f"Error message: {err.errmsg}")
         except ConnectionRefusedError as err:
-            logger.info(msg=f"{debug_connect_string}: Connection refused!")
+            logger.info(msg=f"{host_port}: Connection refused!")
         except:
             raise
         sys.exit(0)
