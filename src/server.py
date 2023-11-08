@@ -31,7 +31,7 @@ import os
 import sys
 import logging
 from robot.run import run
-from socketserver import ThreadingMixIn, BaseServer
+from socketserver import BaseServer
 from xmlrpc.server import (
     SimpleXMLRPCServer,
     SimpleXMLRPCRequestHandler,
@@ -43,11 +43,7 @@ from OpenSSL import SSL
 from base64 import b64decode
 from threading import Thread, Condition
 from _thread import start_new_thread
-from pprint import pprint
-import string
 import traceback
-import time
-from http.server import BaseHTTPRequestHandler
 from io import StringIO
 from utils import (
     write_file_to_disk,
@@ -57,7 +53,6 @@ from utils import (
 )
 import shutil
 import subprocess
-import importlib.util
 import pkg_resources
 
 # Set up the global logger variable
