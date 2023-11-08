@@ -476,6 +476,8 @@ class MyXMLRPCServer(CustomThreadingMixIn, SimpleXMLRPCServer):
         self,
         host,
         port,
+        robot_user,
+        robot_pass,
         keyFile=DEFAULTKEYFILE,
         certFile=DEFAULTCERTFILE,
         logRequests=True,
@@ -672,7 +674,7 @@ if __name__ == "__main__":
         logger.info(msg=f"Certfile '{robot_certfile}' does not exist!")
 
     # Server init
-    server = MyXMLRPCServer(ip=robot_host, port=robot_port, logRequests=True)
+    server = MyXMLRPCServer(host=robot_host, port=robot_port, robot_user=robot_user, robot_pass=robot_pass, logRequests=True)
     # Run the server's main loop
     sa = server.socket.getsockname()
     logger.info(
