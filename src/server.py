@@ -39,6 +39,7 @@ from xmlrpc.server import (
 )
 from xmlrpc.client import Binary
 import socket
+from pathlib import Path
 from OpenSSL import SSL
 from base64 import b64decode
 from threading import Thread, Condition
@@ -646,8 +647,7 @@ class MyXMLRPCServer(CustomThreadingMixIn, SimpleXMLRPCServer):
             raise Exception('method "%s" is not supported' % methodName)
 
 
-if __name__ == "__main__":
-
+def run_server():
     # Get our command line parameters
     (
         robot_log_level,
@@ -673,7 +673,12 @@ if __name__ == "__main__":
     if not os.path.isfile(robot_certfile):
         logger.info(msg=f"Certfile '{robot_certfile}' does not exist!")
 
+    os.environ.setdefault("REQUESTS_CA_BUNDLE", str(Path(robot_keyfile).absolute()))
+    os.environ.setdefault("SSL_CERT_FILE", str(Path(robot_certfile).absolute()))
+
     # Server init
+    logger.info(msg=f"robotframework-remoterunner-ssl: server init ....")
+
     server = MyXMLRPCServer(host=robot_host, port=robot_port, robot_user=robot_user, robot_pass=robot_pass, logRequests=True)
     # Run the server's main loop
     sa = server.socket.getsockname()
@@ -683,3 +688,7 @@ if __name__ == "__main__":
 
     # Server startup
     server.startup()
+
+
+if __name__ == "__main__":
+    run_server()
