@@ -26,7 +26,6 @@
 
 from io import open
 import os
-import re
 import argparse
 from johnnydep.lib import JohnnyDist
 import structlog
