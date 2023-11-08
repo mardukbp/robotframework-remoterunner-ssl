@@ -279,7 +279,7 @@ class RobotFrameworkServer:
                     # prepare the installer string and start the installation
                     installer_exec = [sys.executable, "-m", "pip", "install"]
                     # activate upgrade mode in case the user has requested it
-                    if robot_always_upgrade_packages:
+                    if client_enforces_server_package_upgrade:
                         installer_exec.append("--upgrade")
                     # These are the packages that we want/need to install
                     installer_exec.append(" ".join(pips_to_be_installed))
