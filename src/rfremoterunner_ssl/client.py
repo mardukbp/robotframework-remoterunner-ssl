@@ -30,7 +30,7 @@ from robot.utils.robotpath import find_file
 import os
 import re
 import logging
-from rfremoterunner.utils import (
+from rfremoterunner_ssl.utils import (
     calculate_ts_parent_path,
     read_file_from_disk,
     resolve_output_path,
@@ -38,7 +38,6 @@ from rfremoterunner.utils import (
     get_command_line_params_client,
 )
 import sys
-import shutil
 
 
 # Set up the global logger variable
